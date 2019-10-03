@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import render ,redirect
 from .forms import ContactFileForm
-from .utils import add_to_contacts
+from . import utils
 from django.http import HttpResponse
 
 class ContactViewSet(viewsets.ModelViewSet):
@@ -22,10 +22,16 @@ class FinanceViewSet(viewsets.ModelViewSet):
 def add(request):
     if request.method == 'POST':
         form = ContactFileForm(request.POST, request.FILES)
-        print(request.POST.get('tablename'))
+        
         if form.is_valid():
-            add_to_contacts(request.FILES['file'])
-            return redirect('/contacts')
+            _file = request.FILES['file']
+            table = request.POST.get('tablename')
+            if table == "finance_contacts":
+                utils.add_to_finance_contacts(_file)
+                return redirect('/finance')
+            else:
+                utils.add_to_contacts(_file)
+                return redirect('/contacts')
         else:
             return HttpResponse("<h2>Invalid form</h2>")
         
