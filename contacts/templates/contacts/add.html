@@ -1,0 +1,53 @@
+<html>
+    <head>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    </head>
+    <body class="container">
+        <h1>Add records</h1>
+        <p>Upload excel file. We will add records within to the server database</p>
+        <form enctype="multipart/form-data" method="POST" action="{% url 'contacts:add' %}">
+            {% csrf_token %}
+            <label for="tablename">Upload to</label>
+            <select name="tablename">
+                <option value="all_contacts">All Contacts</option>
+                <option value="finance_contacts">Finance Contacts</option>
+            </select>
+            <br></br>
+            {{ form }}
+        </br></br>
+            <input id="submit" type="submit" value="send">
+        </form>
+    </body>
+
+
+    <style>
+        .container {
+            color: white;
+            width: 90%;
+            margin: 3rem auto;
+            background: #303050;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+        #submit {
+            margin: auto;
+            width: 10rem;
+            height: 2rem;
+            color:  #303050;
+            background: green;
+            border: none;
+        }
+        #submit:hover {
+            color: white;
+
+
+        }
+        @media(min-width: 40rem) {
+            .container {
+                width: 50%;
+            }
+        }
+    </style>
+</html>
