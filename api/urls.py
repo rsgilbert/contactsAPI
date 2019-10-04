@@ -9,8 +9,6 @@ from rest_framework.authtoken import views
 
 # routers to determine the url conf
 router = routers.DefaultRouter()
-router.register(r'contacts', contact_views.ContactViewSet)
-router.register(r'finance', contact_views.FinanceViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
