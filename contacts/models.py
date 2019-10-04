@@ -14,12 +14,15 @@ class Contact(models.Model):
     def __str__(self):
         return f'{self.firstname} {self.lastname}'
 
+
+
 class Finance(models.Model):
     name = models.CharField(max_length=255)
     duty = models.CharField(max_length=255, blank=True, default=",")
     room = models.CharField(max_length=255, blank=True, default="")
     contact = models.CharField(max_length=255)
     
+
     def __str__(self):
         return f'{self.name}'
 

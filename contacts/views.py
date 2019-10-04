@@ -3,7 +3,6 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from .serializers import ContactSerializer, FinanceSerializer
 from .models import Contact, Finance
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import render ,redirect
 from .forms import ContactFileForm
@@ -51,11 +50,10 @@ def add(request):
             _file = request.FILES['file']
             table = request.POST.get('tablename')
             if table == "finance_contacts":
-                utils.add_to_finance_contacts(_file)
+                _file.save_to_database(model=Finance)
                 return redirect('/finance')
             else:
-                utils.add_to_contacts(_file)
-                return redirect('/contacts')
+                _file.save_to_database(model=Contact)
         else:
             return HttpResponse("<h2>Invalid form</h2>")
         
