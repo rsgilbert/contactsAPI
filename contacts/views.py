@@ -8,7 +8,6 @@ from django.shortcuts import render ,redirect
 from .forms import ContactFileForm
 
 from django.db.models import Q
-from . import utils
 
 from rest_framework.views import APIView
 from django.http import HttpResponse
